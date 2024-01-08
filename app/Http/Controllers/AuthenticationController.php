@@ -14,9 +14,13 @@ class AuthenticationController extends Controller
     public function daftar(Request $request)
     {
         $validated = $request->validate([
-            'username' => 'required',
+            'nama' => 'required|max:100',
             'email' => 'required|email',
             'password' => 'required',
+            'jenisk' => 'required',
+            'nohp' => 'required',
+            'alamat' => 'required',
+            'role' => 'required',
         ]);
 
         $user = User::create($request->all());
