@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kotakaspirasi', function (Blueprint $table) {
+        Schema::create('kotakaspirasis', function (Blueprint $table) {
             $table->id();
+            $table->string('gambar')->nullable();
             $table->string('judul');
             $table->text('isi');
-            $table->string('gambar');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->softDeletes();
