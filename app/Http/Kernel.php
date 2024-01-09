@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'kotas' => \App\Http\Middleware\UKAspirasi::class,
         'produk' => \App\Http\Middleware\UProduk::class,
+        'trans' => \App\Http\Middleware\TransaksiM::class,
     ];
 }

@@ -11,6 +11,8 @@ class Kotakaspirasi extends Model
 {
     use HasFactory, SoftDeletes;
 
+    use HasFactory, SoftDeletes;
+
     protected $fillable = [
         'gambar', 'judul', 'isi', 'user_id'
     ];

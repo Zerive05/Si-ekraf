@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kotakaspirasi;
 use Illuminate\Http\Request;
+use App\Models\Kotakaspirasi;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\KotakAspirasiResource;
 
-class KotakAspirasiController extends Controller
+class KotakaspirasiController extends Controller
 {
     public function index()
     {

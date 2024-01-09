@@ -2,9 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\KotakAspirasiController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\KotakAspirasiController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/produk', [ProdukController::class, 'create']);
     Route::patch('/produk/{id}', [ProdukController::class, 'update'])->middleware('produk');
     Route::delete('/produk/{id}', [ProdukController::class, 'delete'])->middleware('produk');
+    Route::get('/transaksi', [TransaksiController::class, 'show'])->middleware('trans');
+    Route::post('/transaksi/{id}', [TransaksiController::class, 'create'])->middleware('trans');
+    Route::delete('/transaksi/{id}', [TransaksiController::class, 'delete'])->middleware('trans');
 });
 
 Route::get('/kotas', [KotakAspirasiController::class, 'index']);
