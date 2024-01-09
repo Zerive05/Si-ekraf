@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Kotakaspirasi;
+use App\Models\Produk;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Uploader
+class UProduk
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,9 @@ class Uploader
     public function handle(Request $request, Closure $next): Response
     {
         $currentUser = Auth::user();
-        $kotas = Kotakaspirasi::findOrFail($request->id);
+        $prod = Produk::findOrFail($request->id);
 
-        if ($kotas->user_id != $currentUser->id) {
+        if ($prod->user_id != $currentUser->id) {
             return response()->json(['message' => 'data not found', 404]);
         }
 
