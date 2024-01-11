@@ -6,20 +6,20 @@ use Illuminate\Http\Request;
 use App\Models\Kotakaspirasi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\KotakAspirasiResource;
+use App\Http\Resources\KotakaspirasiResource;
 
 class KotakaspirasiController extends Controller
 {
     public function index()
     {
         $kotas = Kotakaspirasi::with('uploader:id,nama')->get();
-        return KotakAspirasiResource::collection($kotas);
+        return KotakaspirasiResource::collection($kotas);
     }
 
     public function show($id)
     {
         $kotas = Kotakaspirasi::with('uploader:id,nama')->findOrFail($id);
-        return new KotakAspirasiResource($kotas);
+        return new KotakaspirasiResource($kotas);
     }
 
     public function create(Request $request)
@@ -31,7 +31,7 @@ class KotakaspirasiController extends Controller
 
         $request['user_id'] = Auth::user()->id;
         $kotas = Kotakaspirasi::create($request->all());
-        return new KotakAspirasiResource($kotas->loadMissing('uploader:id,nama'));
+        return new KotakaspirasiResource($kotas->loadMissing('uploader:id,nama'));
     }
 
     public function update(Request $request, $id)
@@ -44,7 +44,7 @@ class KotakaspirasiController extends Controller
         $kotas = Kotakaspirasi::findOrFail($request->id);
         $kotas->update($request->all());
 
-        return new KotakAspirasiResource($kotas->loadMissing('uploader:id,nama'));
+        return new KotakaspirasiResource($kotas->loadMissing('uploader:id,nama'));
     }
 
     public function delete($id)
@@ -52,6 +52,6 @@ class KotakaspirasiController extends Controller
         $kotas = Kotakaspirasi::findOrFail($id);
         $kotas->delete();
 
-        return new KotakAspirasiResource($kotas->loadMissing('uploader:id,nama'));
+        return new KotakaspirasiResource($kotas->loadMissing('uploader:id,nama'));
     }
 }

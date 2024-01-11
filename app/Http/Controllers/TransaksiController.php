@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\TransaksiResource;
-use App\Models\Produk;
 
 class TransaksiController extends Controller
 {

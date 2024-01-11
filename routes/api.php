@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\KotakAspirasiController;
+use App\Http\Controllers\KotakaspirasiController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -25,9 +25,9 @@ use App\Http\Controllers\AuthenticationController;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/keluar', [AuthenticationController::class, 'keluar']);
     Route::get('/aku', [AuthenticationController::class, 'aku']);
-    Route::post('/kotas', [KotakAspirasiController::class, 'create']);
-    Route::patch('/kotas/{id}', [KotakAspirasiController::class, 'update'])->middleware('kotas');
-    Route::delete('/kotas/{id}', [KotakAspirasiController::class, 'delete'])->middleware('kotas');
+    Route::post('/kotas', [KotakaspirasiController::class, 'create']);
+    Route::patch('/kotas/{id}', [KotakaspirasiController::class, 'update'])->middleware('kotas');
+    Route::delete('/kotas/{id}', [KotakaspirasiController::class, 'delete'])->middleware('kotas');
     Route::post('/produk', [ProdukController::class, 'create']);
     Route::patch('/produk/{id}', [ProdukController::class, 'update'])->middleware('produk');
     Route::delete('/produk/{id}', [ProdukController::class, 'delete'])->middleware('produk');
@@ -36,8 +36,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/transaksi/{id}', [TransaksiController::class, 'delete'])->middleware('trans');
 });
 
-Route::get('/kotas', [KotakAspirasiController::class, 'index']);
-Route::get('/kotas/{id}', [KotakAspirasiController::class, 'show']);
+Route::get('/kotas', [KotakaspirasiController::class, 'index']);
+Route::get('/kotas/{id}', [KotakaspirasiController::class, 'show']);
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/{id}', [ProdukController::class, 'show']);
 
