@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->Integer('id_penjual');
+            $table->unsignedBigInteger('id_penjual');
             $table->unsignedBigInteger('id_pembeli');
             $table->unsignedBigInteger('id_produk');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_pembeli', 'id_produk')->references('id')->on('users', 'produks');
+            $table->foreign('id_penjual', 'id_pembeli', 'id_produk')
+                ->references('id')
+                ->on('penjuals', 'pembelis', 'produks');
         });
     }
 

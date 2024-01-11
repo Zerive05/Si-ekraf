@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PenjualSeeder extends Seeder
 {
@@ -12,6 +13,18 @@ class PenjualSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $this->call(UserSeeder::class);
+
+        DB::table('penjuals')->insert([
+            "id_user" => "1",
+            "nama" => "su",
+            "email" => "solo@gmail.com",
+            "password" => bcrypt('12345678'),
+            "jenisk" => "pria",
+            "nohp" => "8516286436",
+            "alamat" => "ngendi bae",
+            "created_at" => date("Y-m-d H:i:s"),
+            "updated_at" => date("Y-m-d H:i:s"),
+        ]);
     }
 }

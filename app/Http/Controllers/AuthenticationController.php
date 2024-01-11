@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\Penjual;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -22,6 +24,34 @@ class AuthenticationController extends Controller
             'alamat' => 'required',
             'role' => 'required',
         ]);
+
+        if (User::where('role', 'penjual')) {
+            DB::table('penjuals')->insert([
+                "id_user" => $request->id,
+                "nama" => $request->nama,
+                "email" => $request->email,
+                "password" => $request->password,
+                "jenisk" => $request->jenisk,
+                "nohp" => $request->nohp,
+                "alamat" => $request->alamat,
+                "created_at" => $request->created_at,
+                "updated_at" => $request->updated_at,
+            ]);
+        }
+
+        if (User::where('role', 'pembeli')) {
+            DB::table('pembelis')->insert([
+                "id_user" => $request->id,
+                "nama" => $request->nama,
+                "email" => $request->email,
+                "password" => $request->password,
+                "jenisk" => $request->jenisk,
+                "nohp" => $request->nohp,
+                "alamat" => $request->alamat,
+                "created_at" => $request->created_at,
+                "updated_at" => $request->updated_at,
+            ]);
+        }
 
         $user = User::create($request->all());
         return new UserResource($user);

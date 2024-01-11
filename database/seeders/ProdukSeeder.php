@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProdukSeeder extends Seeder
 {
@@ -12,6 +14,16 @@ class ProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $this->call(UserSeeder::class);
+
+        DB::table('produks')->insert([
+            "nama" => Str::random('50'),
+            "deskripsi" => Str::random('100'),
+            "hargap" => '10000',
+            "hargaj" => '15000',
+            "id_penjual" => '1',
+            "created_at" => date("Y-m-d H:i:s"),
+            "updated_at" => date("Y-m-d H:i:s"), 
+        ]);
     }
 }

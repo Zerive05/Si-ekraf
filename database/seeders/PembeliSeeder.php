@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Faker\Factory as Faker;
 
-class KotakaspirasiSeeder extends Seeder
+class PembeliSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,10 +15,14 @@ class KotakaspirasiSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
 
-        DB::table('kotakaspirasis')->insert([
-            "judul" => Str::random('100'),
-            "isi" => Str::random('100'),
-            "user_id" => '1',
+        DB::table('users')->insert([
+            "id_user" => "2",
+            "nama" => "as",
+            "email" => "as@gmail.com",
+            "password" => bcrypt('12345678'),
+            "jenisk" => "pria",
+            "nohp" => "8516286436",
+            "alamat" => "ngendi bae",
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s"),
         ]);
