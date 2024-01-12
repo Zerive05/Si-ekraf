@@ -13,9 +13,7 @@ class PembeliSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-
-        DB::table('users')->insert([
+        DB::table('pembelis')->insert([
             "id_user" => "2",
             "nama" => "as",
             "email" => "as@gmail.com",

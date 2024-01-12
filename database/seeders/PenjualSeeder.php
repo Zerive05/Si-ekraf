@@ -13,8 +13,6 @@ class PenjualSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-
         DB::table('penjuals')->insert([
             "id_user" => "1",
             "nama" => "su",

@@ -14,8 +14,6 @@ class ProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-
         DB::table('produks')->insert([
             "nama" => Str::random('50'),
             "deskripsi" => Str::random('100'),

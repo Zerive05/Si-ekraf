@@ -16,8 +16,6 @@ class KotakaspirasiSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UserSeeder::class);
-
         DB::table('kotakaspirasis')->insert([
             "judul" => Str::random('100'),
             "isi" => Str::random('100'),
