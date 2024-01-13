@@ -17,6 +17,8 @@ class ProdukSeeder extends Seeder
         DB::table('produks')->insert([
             "nama" => Str::random('50'),
             "deskripsi" => Str::random('100'),
+            "kategori" => 'kerajinan',
+            "stok" => '100',
             "hargap" => '10000',
             "hargaj" => '15000',
             "id_penjual" => '1',

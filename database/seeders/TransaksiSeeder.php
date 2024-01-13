@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TransaksiSeeder extends Seeder
 {
@@ -12,6 +13,22 @@ class TransaksiSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('transaksis')->insert([
+            "id_penjual" => "1",
+            "id_pembeli" => "1",
+            "id_produk" => "1",
+            "jmlprod" => "2",
+            "created_at" => date("Y-m-d H:i:s"),
+            "updated_at" => date("Y-m-d H:i:s"),
+        ]);
+
+        DB::table('transaksis')->insert([
+            "id_penjual" => "1",
+            "id_pembeli" => "1",
+            "id_produk" => "1",
+            "jmlprod" => "2",
+            "created_at" => date("2005-06-15 14:00:00"),
+            "updated_at" => date("2005-06-15 14:00:00"),
+        ]);
     }
 }

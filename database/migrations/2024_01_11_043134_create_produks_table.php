@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('gambar')->nullable();
             $table->string('nama', 100);
             $table->string('deskripsi');
+            $table->string('kategori');
+            $table->integer('stok');
             $table->float('hargap');
             $table->float('hargaj');
             $table->float('beban')->nullable();

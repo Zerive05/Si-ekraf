@@ -18,10 +18,10 @@ class TransaksiM
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $penjual = Produk::findOrFail($request->id_penjual);
+        $current_user = Produk::findOrFail($request->id_penjual);
         $trans = Transaksi::findOrFail($request->id);
 
-        if ($trans->user_id != $penjual->id_penjual) {
+        if ($trans->user_id != $current_user->id_penjual) {
             return response()->json(['message' => 'data not found', 404]);
         }
 

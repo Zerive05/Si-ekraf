@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\KotakaspirasiController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\TrafficController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,7 @@ Route::get('/kotas', [KotakaspirasiController::class, 'index']);
 Route::get('/kotas/{id}', [KotakaspirasiController::class, 'show']);
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/{id}', [ProdukController::class, 'show']);
+Route::get('/traffic', [TrafficController::class, 'index']);
 
 Route::post('/daftar', [AuthenticationController::class, 'daftar']);
 Route::post('/masuk', [AuthenticationController::class, 'masuk']);

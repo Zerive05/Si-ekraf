@@ -16,12 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('id_penjual');
             $table->unsignedBigInteger('id_pembeli');
             $table->unsignedBigInteger('id_produk');
+            $table->integer('jmlprod');
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('id_penjual', 'id_pembeli', 'id_produk')
-                ->references('id')
-                ->on('penjuals', 'pembelis', 'produks');
+            
+            $table->foreign('id_penjual')->references('id')->on('penjuals');
+            $table->foreign('id_pembeli')->references('id')->on('pembelis');
+            $table->foreign('id_produk')->references('id')->on('produks');
         });
     }
 
