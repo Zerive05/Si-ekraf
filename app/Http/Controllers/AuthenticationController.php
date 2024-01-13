@@ -88,11 +88,11 @@ class AuthenticationController extends Controller
         $tokens = [];
 
         if ($penjual) {
-            $tokens['penjual_token'] = $penjual->createToken('user login')->plainTextToken;
+            $tokens = $penjual->createToken('user login')->plainTextToken;
         }
 
         if ($pembeli) {
-            $tokens['pembeli_token'] = $pembeli->createToken('user login')->plainTextToken;
+            $tokens = $pembeli->createToken('user login')->plainTextToken;
         }
 
         return $tokens;
