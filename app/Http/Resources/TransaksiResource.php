@@ -19,6 +19,7 @@ class TransaksiResource extends JsonResource
             'id_pembeli' => $this->id_pembeli,
             'id_produk' => $this->id_produk,
             'jmlprod' => $this->jmlprod,
+            'created_at' => $this->created_at,
         ];
     }
 }
