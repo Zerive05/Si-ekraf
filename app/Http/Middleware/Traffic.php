@@ -17,13 +17,6 @@ class Traffic
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $currentuser = Auth::user();
-        $trans = Transaksi::findOrFail($request->id);
-
-        if ($trans->id_user != $currentuser->id) {
-            return response()->json(['message' => 'data not found', 404]);
-        }
-
         return $next($request);
     }
 }
