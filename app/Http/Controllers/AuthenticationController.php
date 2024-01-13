@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pembeli;
 use App\Models\Penjual;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,43 +18,51 @@ class AuthenticationController extends Controller
     {
         $validated = $request->validate([
             'nama' => 'required|max:100',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
-            'jenisk' => 'required',
+            'jenisk' => 'required|in:pria,wanita',
             'nohp' => 'required',
             'alamat' => 'required',
-            'role' => 'required',
+            'role' => 'required|in:penjual,pembeli',
         ]);
 
-        if (User::where('role', 'penjual')) {
-            DB::table('penjuals')->insert([
-                "id_user" => $request->id,
-                "nama" => $request->nama,
-                "email" => $request->email,
-                "password" => $request->password,
-                "jenisk" => $request->jenisk,
-                "nohp" => $request->nohp,
-                "alamat" => $request->alamat,
-                "created_at" => $request->created_at,
-                "updated_at" => $request->updated_at,
+        // Create a new user
+        $user = User::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'jenisk' => $request->jenisk,
+            'nohp' => $request->nohp,
+            'alamat' => $request->alamat,
+            'role' => $request->role,
+            'email_verified_at' => now(), // You may need to adjust this based on your requirements
+        ]);
+
+        // Insert data into the respective table based on the role
+        if ($request->role === 'penjual') {
+            Penjual::create([
+                'id_user' => $user->id,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'jenisk' => $request->jenisk,
+                'nohp' => $request->nohp,
+                'alamat' => $request->alamat,
+                'email_verified_at' => now(),
+            ]);
+        } elseif ($request->role === 'pembeli') {
+            Pembeli::create([
+                'id_user' => $user->id,
+                'nama' => $request->nama,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'jenisk' => $request->jenisk,
+                'nohp' => $request->nohp,
+                'alamat' => $request->alamat,
+                'email_verified_at' => now(),
             ]);
         }
 
-        if (User::where('role', 'pembeli')) {
-            DB::table('pembelis')->insert([
-                "id_user" => $request->id,
-                "nama" => $request->nama,
-                "email" => $request->email,
-                "password" => $request->password,
-                "jenisk" => $request->jenisk,
-                "nohp" => $request->nohp,
-                "alamat" => $request->alamat,
-                "created_at" => $request->created_at,
-                "updated_at" => $request->updated_at,
-            ]);
-        }
-
-        $user = User::create($request->all());
         return new UserResource($user);
     }
 

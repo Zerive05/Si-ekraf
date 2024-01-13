@@ -33,13 +33,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/produk/{id}', [ProdukController::class, 'update'])->middleware('produk');
     Route::delete('/produk/{id}', [ProdukController::class, 'delete'])->middleware('produk');
     Route::get('/transaksi/{id}', [TransaksiController::class, 'show'])->middleware('trans');
-    Route::post('/transaksi', [TransaksiController::class, 'create'])->middleware('trans');
+    Route::post('/transaksi', [TransaksiController::class, 'create'])->middleware('pembeli');
     Route::delete('/transaksi/{id}', [TransaksiController::class, 'delete'])->middleware('trans');
     Route::get('/traffic', [TrafficController::class, 'index'])->middleware('traff');
 });
 
 Route::get('/kotas', [KotakaspirasiController::class, 'index']);
 Route::get('/kotas/{id}', [KotakaspirasiController::class, 'show']);
+
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/{id}', [ProdukController::class, 'show']);
 
