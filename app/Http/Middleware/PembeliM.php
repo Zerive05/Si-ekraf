@@ -17,6 +17,13 @@ class PembeliM
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $currentUser = Auth::user();
+        $pembeli = Pembeli::findOrFail($request->id);
+
+        if ($pembeli->id_user != $currentUser->id) {
+            return response()->json(['message' => 'data not found', 404]);
+        }
+
         return $next($request);
     }
 }

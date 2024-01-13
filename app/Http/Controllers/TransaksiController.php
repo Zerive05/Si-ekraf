@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\Penjual;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,9 +25,11 @@ class TransaksiController extends Controller
             'jmlprod' => 'required',
         ]);
 
-        $request['id_penjual'] = DB::table('penjuals')->select(DB::raw('id'));
+        // Assuming you want to get the first result of the query
+        $request['id_penjual'] = Penjual::select('id')->first()->id;
         $request['id_pembeli'] = Auth::user()->id;
-        $request['id_produk'] = DB::table('produks')->select(DB::raw('id'));
+        $request['id_produk'] = Produk::select('id')->first()->id;
+
         $trans = Transaksi::create($request->all());
         return new TransaksiResource($trans);
     }

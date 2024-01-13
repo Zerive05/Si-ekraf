@@ -73,16 +73,31 @@ class AuthenticationController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $penjual = Penjual::where('email', $request->email)->first();
+        $pembeli = Pembeli::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['Email atau password tidak cocok'],
-            ]);
+        if (!$penjual || !Hash::check($request->password, $penjual->password)) {
+            if (!$pembeli || !Hash::check($request->password, $pembeli->password)) {
+                throw ValidationException::withMessages([
+                    'email' => ['Email atau password tidak cocok'],
+                ]);
+            }
         }
 
-        return $user->createToken('user login')->plainTextToken;
+        // If both conditions are false, it means the login is successful
+        $tokens = [];
+
+        if ($penjual) {
+            $tokens['penjual_token'] = $penjual->createToken('user login')->plainTextToken;
+        }
+
+        if ($pembeli) {
+            $tokens['pembeli_token'] = $pembeli->createToken('user login')->plainTextToken;
+        }
+
+        return $tokens;
     }
+
 
     public function keluar(Request $request)
     {
