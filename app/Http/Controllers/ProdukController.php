@@ -27,11 +27,13 @@ class ProdukController extends Controller
         $validated = $request->validate([
             'nama' => 'required|max:100',
             'deskripsi' => 'required',
+            'kategori' => 'required',
+            'stok' => 'required',
             'hargap' => 'required',
             'hargaj' => 'required',
         ]);
 
-        $request['user_id'] = Auth::user()->id;
+        $request['id_penjual'] = Auth::user()->id;
         $prod = Produk::create($request->all());
         return new ProdukResource($prod->loadMissing('uploader:id,nama'));
     }

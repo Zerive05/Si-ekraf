@@ -10,22 +10,23 @@ class TrafficController extends Controller
 {
     public function index(Request $request)
     {
-        $results =
+        $traf =
         DB::table('transaksis')
-        ->select(DB::raw('CONCAT(YEAR(MIN(created_at)), "/", MONTH(MIN(created_at))) AS tahun_bulan'), DB::raw('COUNT(*) AS jumlah_bulanan'))
-        ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
+        ->select(DB::raw('MONTH(MIN(created_at)) AS bulan'), DB::raw('COUNT(*) AS jumlah_pesanan'))
+        ->whereYear('created_at', now())
+        ->groupBy(DB::raw('MONTH(created_at)'))
         ->get();
 
         // Output hasil query
-        foreach ($results as $result) {
-            echo "Tahun/Bulan: " . $result->tahun_bulan . " - Jumlah Bulanan: " . $result->jumlah_bulanan;
-        }
+        // foreach ($results as $result) {
+        //     echo "Tahun/Bulan: " . $result->tahun_bulan . " - Jumlah Bulanan: " . $result->jumlah_bulanan;
+        // }
         // $traf =
         // DB::table('transaksis')
         // ->select(DB::raw("CONCAT(YEAR(created_at),'/',MONTH(created_at)) AS tahun_bulan"), DB::raw('COUNT(*) AS jumlah_bulanan'))
         // ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('MONTH(created_at)'))
         // ->get();
 
-        // return $traf;
+        return $traf;
     }
 }

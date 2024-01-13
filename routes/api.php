@@ -32,16 +32,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/produk', [ProdukController::class, 'create']);
     Route::patch('/produk/{id}', [ProdukController::class, 'update'])->middleware('produk');
     Route::delete('/produk/{id}', [ProdukController::class, 'delete'])->middleware('produk');
-    Route::get('/transaksi', [TransaksiController::class, 'show'])->middleware('trans');
-    Route::post('/transaksi/{id}', [TransaksiController::class, 'create'])->middleware('trans');
+    Route::get('/transaksi/{id}', [TransaksiController::class, 'show'])->middleware('trans');
+    Route::post('/transaksi', [TransaksiController::class, 'create'])->middleware('trans');
     Route::delete('/transaksi/{id}', [TransaksiController::class, 'delete'])->middleware('trans');
+    Route::get('/traffic', [TrafficController::class, 'index'])->middleware('traff');
 });
 
 Route::get('/kotas', [KotakaspirasiController::class, 'index']);
 Route::get('/kotas/{id}', [KotakaspirasiController::class, 'show']);
 Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/produk/{id}', [ProdukController::class, 'show']);
-Route::get('/traffic', [TrafficController::class, 'index']);
 
 Route::post('/daftar', [AuthenticationController::class, 'daftar']);
 Route::post('/masuk', [AuthenticationController::class, 'masuk']);

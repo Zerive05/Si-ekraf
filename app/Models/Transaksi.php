@@ -11,23 +11,7 @@ class Transaksi extends Model
 {
     use HasFactory, SoftDeletes;
 
-    /**
-     * Get the user that owns the Kotakaspirasi
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function id_penjual(): BelongsTo
-    {
-        return $this->belongsTo(Produk::class, 'id_penjual');
-    }
-
-    public function id_pmbeli(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'id');
-    }
-
-    public function id_produk(): BelongsTo
-    {
-        return $this->belongsTo(Produk::class, 'id_produk');
-    }
+    protected $fillable = [
+        'id_penjual', 'id_pembeli', 'id_produk', 'jmlprod'
+    ];
 }

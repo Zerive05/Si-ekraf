@@ -2,14 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Produk;
 use Closure;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class TransaksiM
+class Traffic
 {
     /**
      * Handle an incoming request.
@@ -21,7 +20,7 @@ class TransaksiM
         $currentuser = Auth::user();
         $trans = Transaksi::findOrFail($request->id);
 
-        if ($trans->id_penjual != $currentuser->id) {
+        if ($trans->user_id != $currentuser->id) {
             return response()->json(['message' => 'data not found', 404]);
         }
 

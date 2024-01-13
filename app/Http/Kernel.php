@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'kotas' => \App\Http\Middleware\UKAspirasi::class,
         'produk' => \App\Http\Middleware\UProduk::class,
         'trans' => \App\Http\Middleware\TransaksiM::class,
+        'traff' => \App\Http\Middleware\Traffic::class,
     ];
 }

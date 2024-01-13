@@ -12,7 +12,7 @@ class Produk extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'gambar', 'nama', 'deskripsi', 'hargap', 'hargaj', 'beban', 'user_id'
+        'gambar', 'nama', 'deskripsi', 'kategori', 'stok', 'hargap', 'hargaj', 'beban', 'id_penjual'
     ];
 
     /**
@@ -22,6 +22,6 @@ class Produk extends Model
      */
     public function uploader(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'id_penjual', 'id');
     }
 }
