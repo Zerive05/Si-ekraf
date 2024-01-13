@@ -20,7 +20,7 @@ class Traffic
         $currentuser = Auth::user();
         $trans = Transaksi::findOrFail($request->id);
 
-        if ($trans->user_id != $currentuser->id) {
+        if ($trans->id_user != $currentuser->id) {
             return response()->json(['message' => 'data not found', 404]);
         }
 

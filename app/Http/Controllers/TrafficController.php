@@ -29,4 +29,8 @@ class TrafficController extends Controller
 
         return $traf;
     }
+
+    public function reward(Request $request){
+        
+    }
 }
