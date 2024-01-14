@@ -19,12 +19,13 @@ class TransaksiController extends Controller
         return new TransaksiResource($trans);
     }
 
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
         $validated = $request->validate([
             'jmlprod' => 'required',
         ]);
 
+        $prod = Produk::findOrFail($id);
         // Assuming you want to get the first result of the query
         $request['id_penjual'] = Produk::select('id_penjual')->first()->id_penjual;
         $request['id_pembeli'] = Auth::user()->id;
