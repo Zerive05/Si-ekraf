@@ -26,7 +26,7 @@ class TransaksiController extends Controller
         ]);
 
         // Assuming you want to get the first result of the query
-        $request['id_penjual'] = Penjual::select('id')->first()->id;
+        $request['id_penjual'] = Produk::select('id_penjual')->first()->id;
         $request['id_pembeli'] = Auth::user()->id;
         $request['id_produk'] = Produk::select('id')->first()->id;
 
