@@ -30,15 +30,18 @@ class TrafficController extends Controller
         return $traf;
     }
 
-    public function reward(Request $request){
+    public function reward(Request $request)
+    {
         $results = DB::table('transaksis')
-        ->select('id_penjual', 'jmlprod')
-        ->orderBy('jmlprod', 'desc')
+        ->select('id_penjual', DB::raw('SUM(jmlprod) as total_jmlprod'))
+        ->groupBy('id_penjual')
+        ->orderBy('total_jmlprod', 'desc')
         ->limit(3)
-        ->get();
+            ->get();
 
-        foreach ($results as $result) {
-            echo $result->id_penjual . ': ' . $result->jmlprod;
-        }
+        // Lakukan operasi atau manipulasi data tambahan jika diperlukan
+
+        // Mengembalikan hasil sebagai response JSON
+        return response()->json($results);
     }
 }
