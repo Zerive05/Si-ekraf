@@ -27,9 +27,9 @@ class TransaksiController extends Controller
 
         $prod = Produk::findOrFail($id);
         // Assuming you want to get the first result of the query
-        $request['id_penjual'] = Produk::select('id_penjual')->first()->id_penjual;
+        $request['id_penjual'] = $prod->id_penjual;
         $request['id_pembeli'] = Auth::user()->id;
-        $request['id_produk'] = Produk::select('id')->first()->id;
+        $request['id_produk'] = $prod->id;
 
         $trans = Transaksi::create($request->all());
         return new TransaksiResource($trans);
