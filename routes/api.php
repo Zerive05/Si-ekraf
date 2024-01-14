@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/transaksi', [TransaksiController::class, 'create']);
     Route::delete('/transaksi/{id}', [TransaksiController::class, 'delete'])->middleware('trans');
     Route::get('/traffic', [TrafficController::class, 'index'])->middleware('traff');
+    Route::get('/reward', [TrafficController::class, 'reward'])->middleware('traff');
 });
 
 Route::get('/kotas', [KotakaspirasiController::class, 'index']);

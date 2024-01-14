@@ -31,6 +31,14 @@ class TrafficController extends Controller
     }
 
     public function reward(Request $request){
-        
+        $results = DB::table('transaksis')
+        ->select('id_penjual', 'jmlprod')
+        ->orderBy('jmlprod', 'desc')
+        ->limit(3)
+        ->get();
+
+        foreach ($results as $result) {
+            echo $result->id_penjual . ': ' . $result->jmlprod;
+        }
     }
 }
