@@ -67,6 +67,19 @@ class ProdukController extends Controller
             'beban' => 'required',
         ]);
 
+        $filename = $this->generateRandomString();
+
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->extension();
+
+            // Store the file using the hashed filename
+            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
+
+            // Save the path to the database
+            $request['gambar'] = $path;
+        }
+
+        $request['gambar'] = $filename . '.' . $extension;
         $prod = Produk::findOrFail($request->id);
         $prod->update($request->all());
 

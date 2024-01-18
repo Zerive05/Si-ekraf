@@ -113,6 +113,36 @@ class AuthenticationController extends Controller
         return $tokens;
     }
 
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'nama' => 'required|max:100',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
+            'jenisk' => 'required|in:pria,wanita',
+            'nohp' => 'required',
+            'alamat' => 'required',
+            'role' => 'required|in:penjual,pembeli',
+        ]);
+
+        $filename = $this->generateRandomString();
+
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->extension();
+
+            // Store the file using the hashed filename
+            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
+
+            // Save the path to the database
+            $request['gambar'] = $path;
+        }
+
+        $request['gambar'] = $filename . '.' . $extension;
+        $user = User::findOrFail($request->id);
+        $user->update($request->all());
+
+        return new UserResource($user->loadMissing('uploader:id,nama'));
+    }
 
     public function keluar(Request $request)
     {
