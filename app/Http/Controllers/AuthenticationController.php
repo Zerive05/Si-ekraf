@@ -48,6 +48,7 @@ class AuthenticationController extends Controller
                 'jenisk' => $request->jenisk,
                 'nohp' => $request->nohp,
                 'alamat' => $request->alamat,
+                'role' => $request->role,
                 'email_verified_at' => now(),
             ]);
         } elseif ($request->role === 'pembeli') {
@@ -59,6 +60,7 @@ class AuthenticationController extends Controller
                 'jenisk' => $request->jenisk,
                 'nohp' => $request->nohp,
                 'alamat' => $request->alamat,
+                'role' => $request->role,
                 'email_verified_at' => now(),
             ]);
         }
