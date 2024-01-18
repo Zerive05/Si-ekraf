@@ -106,6 +106,10 @@ class AuthenticationController extends Controller
 
     public function aku(Request $request)
     {
-        return UserResource::response()->json(Auth::user());
+        // Create a new instance of UserResource with the authenticated user
+        $userResource = new UserResource(Auth::user());
+
+        // Return the response using the created UserResource instance
+        return response()->json($userResource);
     }
 }
