@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Resources\ProdukResource;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\ProduklistResource;
 
 class ProdukController extends Controller
 {
     public function index()
     {
         $prod = Produk::with('uploader:id,nama')->get();
-        return ProdukResource::collection($prod);
+        return ProduklistResource::collection($prod);
     }
 
     public function show($id)

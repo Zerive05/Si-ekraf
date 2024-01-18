@@ -106,6 +106,6 @@ class AuthenticationController extends Controller
 
     public function aku(Request $request)
     {
-        return response()->json(Auth::user());
+        return UserResource::response()->json(Auth::user());
     }
 }
