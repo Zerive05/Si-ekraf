@@ -29,6 +29,19 @@ class KotakaspirasiController extends Controller
             'isi' => 'required',
         ]);
 
+        $filename = $this->generateRandomString();
+
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->extension();
+
+            // Store the file using the hashed filename
+            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
+
+            // Save the path to the database
+            $request['gambar'] = $path;
+        }
+
+        $request['gambar'] = $filename . '.' . $extension;
         $request['user_id'] = Auth::user()->id;
         $kotas = Kotakaspirasi::create($request->all());
         return new KotakaspirasiResource($kotas->loadMissing('uploader:id,nama'));
@@ -53,5 +66,16 @@ class KotakaspirasiController extends Controller
         $kotas->delete();
 
         return new KotakaspirasiResource($kotas->loadMissing('uploader:id,nama'));
+    }
+
+    function generateRandomString($length = 30)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }
