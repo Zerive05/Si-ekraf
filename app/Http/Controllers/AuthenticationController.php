@@ -16,6 +16,7 @@ class AuthenticationController extends Controller
 {
     public function daftar(Request $request)
     {
+
         $validated = $request->validate([
             'nama' => 'required|max:100',
             'email' => 'required|email|unique:users',
@@ -25,9 +26,23 @@ class AuthenticationController extends Controller
             'alamat' => 'required',
             'role' => 'required|in:penjual,pembeli',
         ]);
+        
+        $filename = $this->generateRandomString();
 
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->extension();
+
+            // Store the file using the hashed filename
+            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
+
+            // Save the path to the database
+            $request['gambar'] = $path;
+            $request['gambar'] = $filename . '.' . $extension;
+        }
+        
         // Create a new user
         $user = User::create([
+            'gambar' => $request->gambar,
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -42,6 +57,7 @@ class AuthenticationController extends Controller
         if ($request->role === 'penjual') {
             Penjual::create([
                 'id_user' => $user->id,
+                'gambar' => $request->gambar,
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -54,6 +70,7 @@ class AuthenticationController extends Controller
         } elseif ($request->role === 'pembeli') {
             Pembeli::create([
                 'id_user' => $user->id,
+                'gambar' => $request->gambar,
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -63,19 +80,6 @@ class AuthenticationController extends Controller
                 'role' => $request->role,
                 'email_verified_at' => now(),
             ]);
-        }
-
-        $filename = $this->generateRandomString();
-
-        if ($request->hasFile('file')) {
-            $extension = $request->file('file')->extension();
-
-            // Store the file using the hashed filename
-            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
-
-            // Save the path to the database
-            $request['gambar'] = $path;
-            $request['gambar'] = $filename . '.' . $extension;
         }
 
         return new UserResource($user);
