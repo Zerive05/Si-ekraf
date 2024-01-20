@@ -19,6 +19,7 @@ class KotakaspirasiResource extends JsonResource
             'gambar' => $this->gambar,
             'judul' => $this->judul,
             'isi' => $this->isi,
+            "tanggal" => $this->created_at,
             'uploader' => $this->whenLoaded('uploader'),
         ];
     }
