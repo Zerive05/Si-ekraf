@@ -39,9 +39,9 @@ class KotakaspirasiController extends Controller
 
             // Save the path to the database
             $request['gambar'] = $path;
+            $request['gambar'] = $filename . '.' . $extension;
         }
 
-        $request['gambar'] = $filename . '.' . $extension;
         $request['user_id'] = Auth::user()->id;
         $kotas = Kotakaspirasi::create($request->all());
         return new KotakaspirasiResource($kotas->loadMissing('uploader:id,nama'));

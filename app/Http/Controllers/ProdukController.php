@@ -47,9 +47,9 @@ class ProdukController extends Controller
 
             // Save the path to the database
             $request['gambar'] = $path;
+            $request['gambar'] = $filename . '.' . $extension;
         }
 
-        $request['gambar'] = $filename . '.' . $extension;
         $request['id_penjual'] = Auth::user()->id;
         $prod = Produk::create($request->all());
 

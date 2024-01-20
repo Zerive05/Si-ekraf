@@ -75,9 +75,9 @@ class AuthenticationController extends Controller
 
             // Save the path to the database
             $request['gambar'] = $path;
+            $request['gambar'] = $filename . '.' . $extension;
         }
 
-        $request['gambar'] = $filename . '.' . $extension;
         return new UserResource($user);
     }
 
