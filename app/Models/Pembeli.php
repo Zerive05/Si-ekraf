@@ -14,6 +14,7 @@ class Pembeli extends Model
 
     protected $fillable = [
         'id_user',
+        'gambar',
         'nama',
         'email',
         'password',

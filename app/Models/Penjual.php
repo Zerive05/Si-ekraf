@@ -13,11 +13,13 @@ class Penjual extends Model
 
     protected $fillable = [
         'id_user',
+        'gambar',
         'nama',
         'email',
         'password',
         'jenisk',
         'nohp',
         'alamat',
+        'role',
     ];
 }
