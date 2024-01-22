@@ -42,7 +42,6 @@ class AuthenticationController extends Controller
         
         // Create a new user
         $user = User::create([
-            'gambar' => $request->gambar,
             'nama' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -57,7 +56,6 @@ class AuthenticationController extends Controller
         if ($request->role === 'penjual') {
             Penjual::create([
                 'id_user' => $user->id,
-                'gambar' => $request->gambar,
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -70,7 +68,6 @@ class AuthenticationController extends Controller
         } elseif ($request->role === 'pembeli') {
             Pembeli::create([
                 'id_user' => $user->id,
-                'gambar' => $request->gambar,
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
