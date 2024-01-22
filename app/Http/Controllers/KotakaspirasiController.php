@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kotakaspirasi;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\KotaslistResource;
 use App\Http\Resources\KotakaspirasiResource;
 
 class KotakaspirasiController extends Controller
@@ -13,7 +14,7 @@ class KotakaspirasiController extends Controller
     public function index()
     {
         $kotas = Kotakaspirasi::with('uploader:id,nama')->get();
-        return KotakaspirasiResource::collection($kotas);
+        return KotaslistResource::collection($kotas);
     }
 
     public function show($id)
