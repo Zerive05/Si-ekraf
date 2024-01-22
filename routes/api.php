@@ -25,6 +25,7 @@ use App\Http\Controllers\TrafficController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/keluar', [AuthenticationController::class, 'keluar']);
+    Route::get('/saldo', [AuthenticationController::class, 'saldo']);
     Route::patch('/update/{id}', [AuthenticationController::class, 'update']);
     Route::patch('/updateg/{id}', [AuthenticationController::class, 'updateg']);
     Route::get('/aku', [AuthenticationController::class, 'aku']);

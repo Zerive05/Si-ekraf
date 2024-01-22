@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\saldoResource;
 use App\Models\User;
 use App\Models\Pembeli;
 use App\Models\Penjual;
@@ -149,6 +150,12 @@ class AuthenticationController extends Controller
         $user1->update(['gambar' => $request->gambar]);
 
         return new UserResource($user1);
+    }
+
+    public function saldo(Request $request){
+        $saldo = new saldoResource(auth::user());
+
+        return response()->json($saldo);
     }
 
     public function keluar(Request $request)
