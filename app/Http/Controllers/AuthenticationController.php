@@ -149,9 +149,7 @@ class AuthenticationController extends Controller
         }
 
         $user1 = User::findOrFail($request->id);
-        $user1->update([
-            'gambar' => $request->gambar,
-        ]);
+        $user1->update(['gambar' => $request->gambar]);
 
         return new UserResource($user1);
     }
