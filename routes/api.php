@@ -27,7 +27,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/keluar', [AuthenticationController::class, 'keluar']);
     Route::get('/saldo', [AuthenticationController::class, 'saldo']);
     Route::patch('/update/{id}', [AuthenticationController::class, 'update']);
-    Route::patch('/updateg/{id}', [AuthenticationController::class, 'updateg']);
+    Route::post('/updateg/{id}', [AuthenticationController::class, 'updateg']);
     Route::get('/aku', [AuthenticationController::class, 'aku']);
     Route::post('/kotas', [KotakaspirasiController::class, 'create']);
     Route::patch('/kotas/{id}', [KotakaspirasiController::class, 'update'])->middleware('kotas');

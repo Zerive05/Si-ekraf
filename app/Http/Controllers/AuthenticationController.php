@@ -136,23 +136,21 @@ class AuthenticationController extends Controller
 
     public function updateg(Request $request, $id)
     {
-        $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        $filename = $this->generateRandomString();
 
-        $user = User::findOrFail($id);
+        if ($request->hasFile('file')) {
+            $extension = $request->file('file')->extension();
 
-        // Remove existing image if any
-        if ($user->gambar) {
-            // Delete the previous image file from the server
-            unlink(public_path($user->gambar));
+            // Store the file using the hashed filename
+            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
+
+            // Save the path to the database
+            $request['gambar'] = $path;
+            $request['gambar'] = $filename . '.' . $extension;
         }
 
-        $gambar = $request->file('gambar');
-        $gambarName = time() . '.' . $gambar->getClientOriginalExtension();
-        $gambar->move(public_path('gambars'), $gambarName);
-
-        $user->update(['gambar' => 'gambars/' . $gambarName]);
+        $user = User::findOrFail($id);
+        $user->update(['gambar' => 'gambars/' . $filename]);
 
         return new UserResource($user);
     }
