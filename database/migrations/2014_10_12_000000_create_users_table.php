@@ -21,7 +21,7 @@ return new class extends Migration
             $table->bigInteger('nohp');
             $table->string('alamat', 150);
             $table->enum('role', ['penjual', 'pembeli']);
-            $table->bigInteger('saldo')->default('0');
+            $table->float('saldo');
             $table->timestamp('email_verified_at');
             $table->timestamps();
 
