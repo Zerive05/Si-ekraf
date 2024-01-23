@@ -50,7 +50,7 @@ class AuthenticationController extends Controller
             'nohp' => $request->nohp,
             'alamat' => $request->alamat,
             'role' => $request->role,
-            'saldo' => '0',
+            'saldo' => $request->saldo,
             'email_verified_at' => now(), // You may need to adjust this based on your requirements
         ]);
 
@@ -136,19 +136,19 @@ class AuthenticationController extends Controller
 
     public function updateg(Request $request, $id)
     {
-        $filename = $this->generateRandomString();
+        $request->validate([
+            'gambar' => 'required|gambar|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        if ($request->hasFile('file')) {
-            $extension = $request->file('file')->extension();
+        $gambar = $request->file('gambar');
+        $gambarName = time() . '.' . $gambar->extension();
+        $gambar->move(public_path('gambars'), $gambarName);
 
-            // Store the file using the hashed filename
-            $path = $request->file('file')->storeAs('gambar', $filename . '.' . $extension);
-
-            // Save the path to the database
-            $request['gambar'] = $path;
-            $request['gambar'] = $filename . '.' . $extension;
-        }
-
+        $data = [
+            'gambar_path' => 'gambars/' . $gambarName,
+            //Tambahkan kolom lain sesuai kebutuhan
+        ];
+        
         $user1 = User::findOrFail($request->id);
         $user1->update(['gambar' => $request->gambar]);
 

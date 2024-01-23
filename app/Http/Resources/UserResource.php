@@ -24,7 +24,8 @@ class UserResource extends JsonResource
             'jenisk' => $this->jenisk,
             'nohp' => $this->nohp,
             'alamat' => $this->alamat,
-            'role' => $this->role
+            'role' => $this->role,
+            'saldo' => $this->saldo
         ];
     }
 }
