@@ -65,7 +65,7 @@ class AuthenticationController extends Controller
                 'nohp' => $request->nohp,
                 'alamat' => $request->alamat,
                 'role' => $request->role,
-                'saldo' => '0',
+                'saldo' => $request->saldo,
                 'email_verified_at' => now(),
             ]);
         } elseif ($request->role === 'pembeli') {
@@ -78,7 +78,7 @@ class AuthenticationController extends Controller
                 'nohp' => $request->nohp,
                 'alamat' => $request->alamat,
                 'role' => $request->role,
-                'saldo' => '0',
+                'saldo' => $request->saldo,
                 'email_verified_at' => now(),
             ]);
         }

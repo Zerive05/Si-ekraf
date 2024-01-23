@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             "nohp" => "8516286436",
             "alamat" => "ngendi bae",
             "role" => "penjual",
+            "saldo" => "0",
             "created_at" => date("Y-m-d H:i:s"),
             "updated_at" => date("Y-m-d H:i:s"),
         ]);
