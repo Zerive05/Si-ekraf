@@ -137,22 +137,24 @@ class AuthenticationController extends Controller
     public function updateg(Request $request, $id)
     {
         $request->validate([
-            'gambar' => 'required|gambar|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $user = User::findOrFail($id);
+
+        // Remove existing image if any
+        if ($user->gambar) {
+            // Delete the previous image file from the server
+            unlink(public_path($user->gambar));
+        }
+
         $gambar = $request->file('gambar');
-        $gambarName = time() . '.' . $gambar->extension();
+        $gambarName = time() . '.' . $gambar->getClientOriginalExtension();
         $gambar->move(public_path('gambars'), $gambarName);
 
-        $data = [
-            'gambar_path' => 'gambars/' . $gambarName,
-            //Tambahkan kolom lain sesuai kebutuhan
-        ];
-        
-        $user1 = User::findOrFail($request->id);
-        $user1->update(['gambar' => $request->gambar]);
+        $user->update(['gambar' => 'gambars/' . $gambarName]);
 
-        return new UserResource($user1);
+        return new UserResource($user);
     }
 
     public function saldo(Request $request){
