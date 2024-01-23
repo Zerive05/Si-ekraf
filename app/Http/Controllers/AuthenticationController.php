@@ -128,10 +128,14 @@ class AuthenticationController extends Controller
             'alamat' => 'required',
         ]);
 
-        $user = User::findOrFail($request->id);
-        $user->update($request->all());
+        $user1 = User::findOrFail($request->id);
+        $user1->update($request->all());
+        $user2 = Penjual::findOrFail($request->id);
+        $user2->update($request->all());
+        $user3 = Pembeli::findOrFail($request->id);
+        $user3->update($request->all());
 
-        return new UserResource($user);
+        return new UserResource($user1, $user2, $user3);
     }
 
     public function updateg(Request $request, $id)
@@ -149,10 +153,14 @@ class AuthenticationController extends Controller
             $request['gambar'] = $filename . '.' . $extension;
         }
 
-        $user = User::findOrFail($id);
-        $user->update(['gambar' => 'gambars/' . $filename]);
+        $user1 = User::findOrFail($id);
+        $user1->update(['gambar' => 'gambars/' . $filename]);
+        $user2 = Penjual::findOrFail($id);
+        $user2->update(['gambar' => 'gambars/' . $filename]);
+        $user3 = Pembeli::findOrFail($id);
+        $user3->update(['gambar' => 'gambars/' . $filename]);
 
-        return new UserResource($user);
+        return new UserResource($user1, $user2, $user3);
     }
 
     public function saldo(Request $request){
