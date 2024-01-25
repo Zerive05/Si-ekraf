@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('gambar')->nullable();
             $table->string('nama', 100);
-            $table->string('deskripsi');
+            $table->string('deskripsi', 5000);
             $table->string('kategori');
             $table->integer('stok');
             $table->float('hargap');

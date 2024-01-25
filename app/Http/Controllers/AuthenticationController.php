@@ -130,12 +130,16 @@ class AuthenticationController extends Controller
 
         $user1 = User::findOrFail($request->id);
         $user1->update($request->all());
-        $user2 = Penjual::findOrFail($request->id);
+        if ($user1->role == 'penjual'){
+        $user2 = Penjual::findOrFail($request->id_user);
         $user2->update($request->all());
-        $user3 = Pembeli::findOrFail($request->id);
+        return new UserResource($user1, $user2);
+        }elseif ($user1->role == 'pembeli'){
+        $user3 = Pembeli::findOrFail($request->id_user);
         $user3->update($request->all());
+        return new UserResource($user1, $user3);
+        }
 
-        return new UserResource($user1, $user2, $user3);
     }
 
     public function updateg(Request $request, $id)
@@ -155,9 +159,9 @@ class AuthenticationController extends Controller
 
         $user1 = User::findOrFail($id);
         $user1->update(['gambar' => 'gambars/' . $filename]);
-        $user2 = Penjual::findOrFail($id);
+        $user2 = Penjual::findOrFail($request->id_user);
         $user2->update(['gambar' => 'gambars/' . $filename]);
-        $user3 = Pembeli::findOrFail($id);
+        $user3 = Pembeli::findOrFail($request->id_user);
         $user3->update(['gambar' => 'gambars/' . $filename]);
 
         return new UserResource($user1, $user2, $user3);
