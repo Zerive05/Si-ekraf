@@ -20,7 +20,7 @@ class PembeliM
         $currentUser = Auth::user();
         $pembeli = Pembeli::findOrFail($request->id);
 
-        if ($pembeli->id_user != $currentUser->id) {
+        if ($pembeli->id != $currentUser->id) {
             return response()->json(['message' => 'data not found', 404]);
         }
 

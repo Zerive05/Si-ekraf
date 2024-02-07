@@ -14,7 +14,7 @@ class PenjualSeeder extends Seeder
     public function run(): void
     {
         DB::table('penjuals')->insert([
-            "id_user" => "1",
+            "id" => "1",
             "nama" => "su",
             "email" => "solo@gmail.com",
             "password" => bcrypt('12345678'),

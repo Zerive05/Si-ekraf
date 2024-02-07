@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('penjuals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user');
             $table->string('nama', 100);
             $table->string('email')->unique();
             $table->string('password');
@@ -26,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id')->references('id')->on('users');
         });
     }
 

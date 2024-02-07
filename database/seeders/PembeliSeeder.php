@@ -14,7 +14,7 @@ class PembeliSeeder extends Seeder
     public function run(): void
     {
         DB::table('pembelis')->insert([
-            "id_user" => "2",
+            "id" => "2",
             "nama" => "as",
             "email" => "as@gmail.com",
             "password" => bcrypt('12345678'),

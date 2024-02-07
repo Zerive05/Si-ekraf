@@ -18,7 +18,7 @@ class TransaksiFactory extends Factory
     {
         return [
             "id_penjual" => "1",
-            "id_pembeli" => "1",
+            "id_pembeli" => "2",
             "id_produk" => "1",
             "jmlprod" => rand(1, 100), // Corrected the rand function call
             "created_at" => $this->faker->dateTimeBetween($startDate = '-2 years', $endDate = 'now')->format('Y-m-d H:i:s'),

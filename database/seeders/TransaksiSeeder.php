@@ -16,7 +16,7 @@ class TransaksiSeeder extends Seeder
     {
         DB::table('transaksis')->insert([
             "id_penjual" => "1",
-            "id_pembeli" => "1",
+            "id_pembeli" => "2",
             "id_produk" => "1",
             "jmlprod" => "2",
             "created_at" => date("Y-m-d H:i:s"),
@@ -27,7 +27,7 @@ class TransaksiSeeder extends Seeder
 
         // DB::table('transaksis')->insert([
         //     "id_penjual" => "1",
-        //     "id_pembeli" => "1",
+        //     "id_pembeli" => "2",
         //     "id_produk" => "1",
         //     "jmlprod" => rand('1', '100'),
         //     "created_at" => date("2005-06-15 14:00:00"),
