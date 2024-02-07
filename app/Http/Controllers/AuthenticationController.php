@@ -159,8 +159,15 @@ class AuthenticationController extends Controller
 
         $user1 = User::findOrFail($id);
         $user1->update(['gambar' => 'gambars/' . $filename]);
-
-        return new UserResource($user1);
+        if ($user1->role == 'penjual') {
+            $user2 = Penjual::findOrFail($id);
+            $user2->update(['gambar' => 'gambars/' . $filename]);
+            return new UserResource($user1, $user2);
+        } elseif ($user1->role == 'pembeli') {
+            $user3 = Pembeli::findOrFail($id);
+            $user3->update(['gambar' => 'gambars/' . $filename]);
+            return new UserResource($user1, $user3);
+        }
     }
 
     public function saldo(Request $request){
