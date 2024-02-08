@@ -93,6 +93,7 @@ class AuthenticationController extends Controller
             'password' => 'required',
         ]);
 
+        $user = User::where('email', $request->email)->first();
         $penjual = Penjual::where('email', $request->email)->first();
         $pembeli = Pembeli::where('email', $request->email)->first();
 
@@ -106,6 +107,7 @@ class AuthenticationController extends Controller
 
         // If both conditions are false, it means the login is successful
         $tokens = [];
+        $tokens['Role'] = $user->role;
 
         if ($penjual) {
             $tokens['Token'] = $penjual->createToken('user login')->plainTextToken;
